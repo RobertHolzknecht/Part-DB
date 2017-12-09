@@ -659,7 +659,7 @@ function registerJumpToTop() {
             scrollTop: 0
         }, 800);
         return false;
-    }).tooltip('show');
+    }).tooltip();
 }
 
 /**

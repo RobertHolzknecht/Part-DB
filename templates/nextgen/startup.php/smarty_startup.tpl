@@ -95,11 +95,11 @@
 
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
+<div class="card border-primary">
+    <div class="card-header bg-primary text-white ">
         <h3><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp{t}Lizenz{/t}</h3>
     </div>
-    <div class="panel-body">
+    <div class="card-body ">
         <p>Part-DB, Copyright &copy; 2005 of <strong>Christoph Lechner</strong>. <br> Part-DB is published under the <strong>GPL</strong>, so it comes with <strong>ABSOLUTELY NO WARRANTY</strong>,
             click <a href="{$relative_path}readme/gpl.txt" class="link-external" rel="noopener" target="_blank">here</a> for details.
             This is free software, and you are welcome to redistribute it under certain conditions.
@@ -130,9 +130,11 @@
     </table>
 </div>
 
+<br>
+
 {if !empty($rss_feed_loop)}
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card">
+        <div class="card-head">
             <h4><i class="fa fa-rss fa-fw" aria-hidden="true"></i>&nbsp{t}Updates{/t}</h4>
         </div>
         <div class="table-responsive">

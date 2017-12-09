@@ -540,7 +540,7 @@ function registerJumpToTop() {
             scrollTop: 0
         }, 800);
         return false;
-    }).tooltip('show');
+    }).tooltip();
 }
 /**
  * This function add a hidden input element, if a button with the class ".rightclick" is rightclicked.

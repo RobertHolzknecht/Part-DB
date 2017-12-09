@@ -53,7 +53,7 @@
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{$relative_path}js/jquery-3.2.1.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="{$relative_path}js/bootstrap.min.js"></script>
+        <script src="{$relative_path}js/bootstrap.bundle.min.js"></script>
 
         <!-- Bootstrap select -->
         <link rel="stylesheet" href="{$relative_path}css/bootstrap-select.min.css">
@@ -92,9 +92,13 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-default navbar-fixed-top" id="main-navbar">
+
+    {*
+
+        <nav class="navbar navbar-dark navbar-fixed-top" id="main-navbar">
             <div class="container-fluid">
              <!-- Brand and toggle get grouped for better mobile display -->
+                <!--
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">
                         <span class="sr-only">{t}Toggle Sidebar{/t}</span>
@@ -113,11 +117,13 @@
                         <i class="fa fa-barcode" aria-hidden="true"></i>
                         <span class="sr-only">{t}Scanne Barcode{/t}</span>
                     </a>
+                    </div> -->
+
                     <a class="navbar-brand" href="{$relative_path}startup.php"><i class="fa fa-microchip" aria-hidden="true"></i> {if !empty($partdb_title)}{$partdb_title}{else}Part-DB{/if}</a>
-                </div>
+
 
                 <ul class="nav collapse navbar-collapse navbar-nav navbar-right" id="userbar">
-                    <li class="dropdown">
+                    <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle link-anchor" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {if $loggedin}<i class="fa fa-user" aria-hidden="true"></i>{else}<i class="far fa-user" aria-hidden="true"></i>{/if} <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="login-menu">
@@ -194,34 +200,61 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        *}
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="{$relative_path}startup.php"><i class="fa fa-microchip" aria-hidden="true"></i> {if !empty($partdb_title)}{$partdb_title}{else}Part-DB{/if}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end ml-auto" id="navbarNavDropdown">
+                <ul class="navbar-nav ">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle link-anchor nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {if $loggedin}<i class="fa fa-user" aria-hidden="true"></i>{else}<i class="far fa-user" aria-hidden="true"></i>{/if}</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                           {if $loggedin}
+                            <a class="dropdown-item disabled" href="#" >{t}Eingeloggt als{/t} {$firstname} {$lastname} ({$username})</a>
+                            <a class="dropdown-item disabled" href="user_settings.php"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i> {t}Benutzereinstellungen{/t}</a>
+                            <a class="dropdown-item disabled" href="user_info.php"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i> {t}Benutzerinformationen{/t}</a>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <a class="dropdown-item disabled" href="{$relative_path}login.php?logout"><i class="fa fa-sign-out-alt fa-fw" aria-hidden="true"></i> {t}Logout{/t}</a>
+                        {else}
+                            <a class="dropdown-item disabled" href="{$relative_path}login.php"><i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i> {t}Login{/t}</a>
+                        {/if}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
     </header>
    
    <main>
       <div class="container-fluid">
    
            <div class="row">
-                <aside class="hidden-print col-sm-3 col-md-2 sidebar-collapse collapse sidebar-container" id="sidebar">
+                <aside class="hidden-print col-2 sidebar-collapse collapse sidebar-container" id="sidebar">
                     <nav class="fixed-sidebar" id="fixed-sidebar">
                         <div class="">
-                            <ul class="nav navmenu-nav">
+                            <ul class="nav flex-column navmenu-nav">
                             {if isset($can_category) && $can_category}
-                                <li id="categories">
+                                <li class="nav-item" id="categories">
                                 <!-- <h4>{t}Kategorien{/t}</h4>-->
                                     <div class="dropdown">
                                         <button class="btn-text dropdown-toggle" type="button" id="dropdownCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                            <div class="sidebar-title">{t}Kategorien{/t}
-                                                <span class="caret"></span></div>
+                                            <div class="sidebar-title">{t}Kategorien{/t}</div>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownCat">
-                                            <li><a href="#" class="tree-btns" data-mode="expand" data-target="tree-categories">{t}Alle ausklappen{/t}</a></li>
-                                            <li><a href="#" class="tree-btns" data-mode="collapse" data-target="tree-categories">{t}Alle einklappen{/t}</a></li>
+                                            <a href="#" class="dropdown-item tree-btns" data-mode="expand" data-target="tree-categories">{t}Alle ausklappen{/t}</a>
+                                            <a href="#" class="dropdown-item tree-btns" data-mode="collapse" data-target="tree-categories">{t}Alle einklappen{/t}</a>
                                         </ul>
                                     </div>
                                     <div id="tree-categories"></div>
                                 </li>
                                 {/if}
                                 {if !$devices_disabled && isset($can_device) && $can_device}
-                                <li id="devices">
+                                <li  class="nav-item" id="devices">
                                     <div class="dropdown">
                                         <button class="btn-text dropdown-toggle" type="button" id="dropdownDev" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <div class="sidebar-title">{t}Baugruppen{/t}
@@ -236,7 +269,7 @@
                                 </li>
                                 {/if}
 
-                                <li id="tools">
+                                <li  class="nav-item" id="tools">
                                     <div class="dropdown">
                                         <button class="btn-text dropdown-toggle" type="button" id="dropdownTools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <div class="sidebar-title">{t}Verwaltung{/t}
@@ -257,7 +290,7 @@
                     </nav>
                 </aside>
                 
-                <div class="col-sm-9 col-md-10" id="main">
+                <div class="col-10" id="main">
 
                     <div class="container-fluid container-progress" id="progressbar" hidden>
                         <div class="progress">
