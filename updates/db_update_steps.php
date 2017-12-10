@@ -36,7 +36,7 @@ include_once(BASE.'/updates/db_migration_functions.php');
  *          -> this new "case" must have the number "LATEST_DB_VERSION - 1"!
  */
 
-define('LATEST_DB_VERSION', 22);  // <-- increment here
+define('LATEST_DB_VERSION', 23);  // <-- increment here
 
 /*
  * Get update steps
@@ -919,6 +919,25 @@ EOD;
             $updateSteps[] = "ALTER TABLE `attachements` " .
                 "ADD `last_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00';";
         break;
+
+        case 22:
+            //Create Tags table
+            $updateSteps[] = "CREATE TABLE `part-db`.`tags` ".
+                "( `id` INT NOT NULL AUTO_INCREMENT ,".
+                " `name` TINYTEXT NOT NULL  ,".
+                " `comment` TEXT NULL DEFAULT NULL ,".
+                " `datetime_added` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ,".
+                " `last_modified` TIMESTAMP on update CURRENT_TIMESTAMP() NOT NULL DEFAULT '0000-00-00 00:00:00' ,".
+                "  PRIMARY KEY (`id`));";
+
+            //Create Tags parts intersect table
+            $updateSteps[] = "CREATE TABLE `part-db`.`parts_tags`".
+                " ( `id` INT NOT NULL  AUTO_INCREMENT,".
+                " `id_part` INT NOT NULL ,".
+                " `id_tag` INT NOT NULL ,".
+                " PRIMARY KEY (`id`),".
+                " INDEX (`id_tag`, `id_part`));";
+            break;
 
         /*
 
