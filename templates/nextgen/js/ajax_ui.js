@@ -247,15 +247,18 @@ var AjaxUI = /** @class */ (function () {
         var contextmenu_handler = this.onNodeContextmenu;
         $.getJSON(BASE + 'api.php/1.0.0/tree/categories', function (tree) {
             $("#tree-categories").treeview({ data: tree, enableLinks: false, showIcon: false,
-                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler }).treeview('collapseAll', { silent: true });
+                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler,
+                expandIcon: "fas fa-plus fa-fw", emptyIcon: "fas", collapseIcon: "fas fa-minus fa-fw" }).treeview('collapseAll', { silent: true });
         });
         $.getJSON(BASE + 'api.php/1.0.0/tree/devices', function (tree) {
             $('#tree-devices').treeview({ data: tree, enableLinks: false, showIcon: false,
-                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler }).treeview('collapseAll', { silent: true });
+                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler,
+                expandIcon: "fas fa-plus fa-fw", emptyIcon: "fas", collapseIcon: "fas fa-minus fa-fw" }).treeview('collapseAll', { silent: true });
         });
         $.getJSON(BASE + 'api.php/1.0.0/tree/tools', function (tree) {
             $('#tree-tools').treeview({ data: tree, enableLinks: false, showIcon: false,
-                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler }).treeview('collapseAll', { silent: true });
+                showBorder: true, onNodeSelected: node_handler, onNodeContextmenu: contextmenu_handler,
+                expandIcon: "fas fa-plus fa-fw", emptyIcon: "fas", collapseIcon: "fas fa-minus fa-fw" }).treeview('collapseAll', { silent: true });
         });
         this.trees_filled = true;
     };
